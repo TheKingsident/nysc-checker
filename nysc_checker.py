@@ -17,6 +17,7 @@ TWILIO_ACCOUNT_SID = os.getenv("TWILIO_ACCOUNT_SID")
 TWILIO_AUTH_TOKEN = os.getenv("TWILIO_AUTH_TOKEN")
 TWILIO_FROM = os.getenv("TWILIO_FROM")
 TWILIO_TO = os.getenv("TWILIO_TO")
+RECEIVER_EMAIL = os.getenv("RECEIVER_EMAIL")
 
 url = "https://portal.nysc.org.ng/nysc1/"
 KEYWORD = "No Active Registration"
@@ -34,12 +35,11 @@ def is_registration_open():
         return False
     
 def send_email_alert():
-    reciever = "hello@kingsleyusa.dev"
     try:
         yag = yagmail.SMTP(EMAIL_ADDRESS, EMAIL_PASSWORD)
         subject = "📢 NYSC Registration is NOW OPEN!"
         body = "Visit https://portal.nysc.org.ng/nysc1/ to register ASAP!"
-        yag.send(to=reciever, subject=subject, contents=body)
+        yag.send(to=RECEIVER_EMAIL, subject=subject, contents=body)
         print("Email sent successfully!")
     except Exception as e:
         print(f"Failed to send email: {e}")
